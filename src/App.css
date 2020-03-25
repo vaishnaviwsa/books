@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+.page_number{
+  cursor: pointer;
+  justify-content: space-between;
+ 
+}
+
+.active_number{
+  background-color: burlywood;
+}
+/* .pagination{
+} */
+
+.dropDownScore{
+    width: 60%;
+    border-radius: 5%;
+    border-color: black;
+}
+
+
+a.nav-link:hover {
+  background-color: #007bff;
+}
+
+a.nav-link:active{
+  background-color: blue;
+}
+
+#react-paginate ul {
+  display: inline-block;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+#react-paginate li {
+  display: inline-block;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

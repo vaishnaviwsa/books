@@ -14,9 +14,12 @@ import ActionPage from './components/actionPage';
 import Home from './components/home';
 import AddBook from './components/addBook';
 import EditBook from './components/editBook';
+import {createStore} from 'redux';
+import {Provider} from 'react-redux'; 
+import rootReducer from './reducers';
 
 function App() {
-  // const history=useHistory();
+  const store=createStore(rootReducer);
   const [showData,setShowData]=useState(false)
   const [books,setBooks]=useState([{
     id:234,
@@ -105,41 +108,54 @@ function App() {
         
         <Switch>
           <Route exact path="/">
-            {/* <FormikLogin/> */}
-            <LoginPage/>
+            <Provider store={store} >
+                <LoginPage/>
+            </Provider>
           </Route>
           <Route path="/bugs">
             <BugsData />
           </Route>
           <Route path="/actionPage">
-            <ActionPage/>
+            <Provider store={store} >
+                <ActionPage/>
+            </Provider>
           </Route>
           <Route path="/books">
-            <Home
-              books={books}
-              editBook={editBook}
-              onClickEdit={onClickEdit}
-              onInptChng={onInptChng}
-              doneWthEdit={doneWthEdit}
-              deleteBook={deleteBook}
-            />
+            <Provider store={store} >
+              <Home />
+              {/* <Home
+                books={books}
+                editBook={editBook}
+                onClickEdit={onClickEdit}
+                onInptChng={onInptChng}
+                doneWthEdit={doneWthEdit}
+                deleteBook={deleteBook}
+              /> */}
+            </Provider>
           </Route>
           <Route path="/addBook">
-            <AddBook
-              books={books}
-              addBook={addBook}
-            />
+              <Provider store={store} >
+                <AddBook/>   
+                {/* <AddBook
+                  books={books}
+                  addBook={addBook}
+                /> */}
+              </Provider>
           </Route>
           <Route path="/editBook">
-            <EditBook
+              <Provider store={store} >
+                <EditBook/>
+              </Provider>
+            {/* <EditBook
               books={books}
               editBook={editBook}
               onClickEdit={onClickEdit}
               onEditBook={onEditBook}
-            />
+            /> */}
           </Route>
           
         </Switch>
+        
       </div>
     </Router>
   );

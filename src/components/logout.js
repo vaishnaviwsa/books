@@ -15,7 +15,7 @@ const Logout=()=>{
 return(
     <>
         <div className="col-xs-6 col-md-12 ">
-        <button type="button" class="btn btn-info" onClick={logOut}>Log Out</button>
+        <button type="button" className="btn btn-info" onClick={logOut}>Log Out</button>
         </div>
     </>
 )

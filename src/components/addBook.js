@@ -4,14 +4,15 @@ import * as Yup from 'yup';
 import {Formik,Field,Form,ErrorMessage} from 'formik';
 import {Link,useHistory} from 'react-router-dom';
 import Logout from './logout';
-
+import {connect} from 'react-redux'
+import { addBook } from '../actions';
 // const AddBook=(children)=>{
 const AddBook=(props)=>{
     // const books=localStorage.getItem('books');
     // console.log('books',books);
     console.log('props',props);
     const history=useHistory();
-    const [newBook,setNewBook]=useState({});
+    // const [newBook,setNewBook]=useState({});
     // const addBook=(values)=>{
     //     alert('addBook')
     //     console.log('values',values);
@@ -54,16 +55,23 @@ return(
                 }
                 onSubmit={values=>{
                     console.log('onSubmit',values);
-                    setNewBook(values);
-                    let res=props.addBook(values);
+                    // setNewBook(values);
+                    // let res=props.addBook(values);
+                    let res=props.dispatch(addBook(values)) ;
+                    
                     console.log('res',res);
-
-                    if(res===true){
-                        history.push('/books');
+                    if(res.book.id){
+                            history.push('/books');
                     }
                     else{
                         alert('something went wrong');
                     }
+                    // if(res===true){
+                    //     history.push('/books');
+                    // }
+                    // else{
+                    //     alert('something went wrong');
+                    // }
                     
                 }}
             >
@@ -114,4 +122,4 @@ return(
     </>
     )
 }
-export default AddBook;
+export default connect()(AddBook);

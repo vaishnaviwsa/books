@@ -4,10 +4,14 @@ import * as Yup from 'yup';
 import {Formik,Field,Form,ErrorMessage} from 'formik';
 import {Link,useHistory} from 'react-router-dom';
 import Logout from './logout';
+import {connect} from 'react-redux';
+import { getEditBook, editBook } from '../actions';
+
 
 const EditBook=(props)=>{
     let history=useHistory();
-    // console.log('props',props);
+    console.log('props',props);
+    // let [editBook,setEditBook]=useState({});
    
 return(
     <>
@@ -25,7 +29,7 @@ return(
                 <h4>Books</h4>
                 {props.books.map(bk=>(
                     <div>
-                    <div className='row p-2'><a href='#' onClick={(e)=>props.onClickEdit(e,bk)}>{bk.title}</a>
+                    <div className='row p-2'><a href='#' onClick={()=>props.dispatch(getEditBook(bk))}>{bk.title}</a>
                     </div>
                     <div className='row ' style={{paddingLeft: '30px'}}>
                         <span style={{fontWeight:'bold'}}>Author : </span>
@@ -49,7 +53,7 @@ return(
                 ))}
             </div>
             <div className="col-md-6">
-            {props.editBook.id?
+            {props.editingBook?
             <Formik
                 initialValues={props.editBook}
                 validationSchema={
@@ -66,7 +70,7 @@ return(
                 }
                 onSubmit={values=>{
                     console.log('onSubmit',values);
-                    props.onEditBook(values);
+                    props.dispatch(editBook(values));
                 }}
             >
             {({errors,touched,values})=>(
@@ -124,4 +128,9 @@ return(
     </>
 )
 }
-export default EditBook;
+const mapStateTOProps=(state)=>({
+    books:state.books.booksList,
+    editBook:state.books.editBook,
+    editingBook:state.books.editingBook 
+})
+export default connect(mapStateTOProps)(EditBook);
